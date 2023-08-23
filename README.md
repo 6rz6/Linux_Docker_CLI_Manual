@@ -260,6 +260,148 @@ Welcome to the comprehensive guide to the Linux Command Line Interface (CLI) and
 
 ---
 
-This enhanced
+**Linux CLI and Docker Manual** *(Continuation)*
 
- manual should act as a comprehensive primer for you, blending essential commands with real-world examples. Keep it handy for swift reference!
+---
+
+**5. Docker-Compose Commands**
+
+- **Start services defined in a docker-compose.yml**:
+  ```
+  docker-compose up
+  Example: docker-compose up
+  ```
+
+  - **Start services in detached mode**:
+    ```
+    docker-compose up -d
+    Example: docker-compose up -d
+    ```
+
+  - **Stop running services**:
+    ```
+    docker-compose down
+    Example: docker-compose down
+    ```
+
+  - **List running services**:
+    ```
+    docker-compose ps
+    Example: docker-compose ps
+    ```
+
+  - **Build or rebuild services**:
+    ```
+    docker-compose build
+    Example: docker-compose build
+    ```
+
+  - **Check service logs**:
+    ```
+    docker-compose logs <SERVICE_NAME>
+    Example: docker-compose logs webapp
+    ```
+
+  - **Execute command in a running service container**:
+    ```
+    docker-compose exec <SERVICE_NAME> <COMMAND>
+    Example: docker-compose exec webapp ls -la
+    ```
+
+---
+
+**6. Nginx on Docker Domain, Subdomain, and DNS Setting Commands**
+
+*(Note: These commands assume you're running an nginx container and have access to DNS settings for domain configuration.)*
+
+- **Run an Nginx container with a bound configuration**:
+  ```
+  docker run -d -p 80:80 -v /path/to/nginx.conf:/etc/nginx/nginx.conf nginx
+  Example: docker run -d -p 80:80 -v ~/nginx.conf:/etc/nginx/nginx.conf nginx
+  ```
+
+  - **Sample Nginx configuration for domain and subdomain**:
+    ```nginx
+    server {
+        listen 80;
+        server_name example.com www.example.com;
+        location / {
+            proxy_pass http://your_backend_service_address;
+        }
+    }
+
+    server {
+        listen 80;
+        server_name sub.example.com;
+        location / {
+            proxy_pass http://your_backend_service_address_for_subdomain;
+        }
+    }
+    ```
+
+  - **Update DNS records for domain and subdomain**:
+    ```
+    (This isn't a command, but a procedure. Use your DNS provider's interface to point `example.com` and `sub.example.com` to your server's IP address.)
+    ```
+
+  - **Reload Nginx inside Docker without stopping the container**:
+    ```
+    docker exec <CONTAINER_ID/NAME> nginx -s reload
+    Example: docker exec nostalgic_turing nginx -s reload
+    ```
+
+---
+
+**7. Linux Server and Docker Container Port Security**
+
+*(Note: The following procedures are general practices for maintaining security. Please ensure that you have the necessary software/tools installed and always keep backups before making any changes.)*
+
+- **Check open ports on Linux server**:
+  ```
+  sudo netstat -tuln
+  Example: sudo netstat -tuln
+  ```
+
+  - **Limit ports using UFW (Uncomplicated Firewall)**:
+    ```
+    sudo ufw allow <PORT>/<PROTOCOL>
+    Example: sudo ufw allow 22/tcp
+    ```
+
+  - **Deny a specific port using UFW**:
+    ```
+    sudo ufw deny <PORT>/<PROTOCOL>
+    Example: sudo ufw deny 3306/tcp
+    ```
+
+  - **Enable UFW**:
+    ```
+    sudo ufw enable
+    Example: sudo ufw enable
+    ```
+
+  - **Check Docker container's exposed ports**:
+    ```
+    docker port <CONTAINER_ID/NAME>
+    Example: docker port jolly_pasteur
+    ```
+
+  - **Limit Docker container port exposure**:
+    *(When running a Docker container, you can map only necessary ports to host ports.)*
+    ```
+    docker run -p <HOST_PORT>:<CONTAINER_PORT> <IMAGE_NAME>
+    Example: docker run -p 8080:80 nginx:latest
+    ```
+
+  - **Keep Docker and its dependencies updated**:
+    ```
+    sudo apt-get update && sudo apt-get upgrade docker docker-compose
+    Example: sudo apt-get update && sudo apt-get upgrade docker docker-compose
+    ```
+
+  - **Run containers with a non-root user**:
+    *(This involves using the `--user` flag with Docker and setting up Dockerfile to support non-root users. Here's a general command.)*
+    ```
+    docker run -d --user <UID>:<GID> <IMAGE_NAME>
+    Example: docker run -d --user 1001:1001 nginx:latest
+    ```
