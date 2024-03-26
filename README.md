@@ -8,6 +8,8 @@
  - **Update Package Index & Install Required Packages**
   ```bash
   sudo apt update
+  ```
+  ```bash
   sudo apt install apt-transport-https ca-certificates curl software-properties-common
   ```
   
