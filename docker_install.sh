@@ -1,11 +1,9 @@
 #!/bin/bash
 
-### Instaling docker in one click
-# How to Run the Script:
+# How to Run the Install docker in one command Script:
 # 1. Save the Script on the server in a file named docker_install.sh    
 # 2. Make the Script Executable using: chmod +x docker_install.sh
 # 3. Run the Script using: ./docker_install.sh
-###
 
 # Update Package Index
 sudo apt update -y
