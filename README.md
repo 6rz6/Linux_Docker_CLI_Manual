@@ -1,40 +1,42 @@
 # Full Docker Install Manual on Linux CLI 
 
-Install Docker on Ubuntu and Debian - step by step tutorial
 
+**Install Docker on Ubuntu and Debian** using a single command [docker install script](https://github.com/6rz6/Linux_Docker_CLI_Manual/blob/main/docker_install.sh) 
 
-  **Update Package Index & Install Required Packages**
+### step by step tutorial
+
+ - **Update Package Index & Install Required Packages**
   ```bash
   sudo apt update
   sudo apt install apt-transport-https ca-certificates curl software-properties-common
   ```
   
-  **Download and Add Docker GPG Key**
+ - **Download and Add Docker GPG Key**
   ```bash
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
   ```
   
-  **Add Docker Repository**
+ - **Add Docker Repository**
   ```bash
   echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
   ```
   
-  **Update Package Index**
+ - **Update Package Index**
   ```bash
   sudo apt update
   ```
   
-  **Install Docker CE**
+ - **Install Docker CE**
   ```bash
   sudo apt install docker-ce
   ```
   
-  **Start Docker Daemon**
+ - **Start Docker Daemon**
   ```bash
   sudo systemctl start docker
   ```
   
-  **Enable Docker to Start on Boot**
+ - **Enable Docker to Start on Boot**
   ```bash
   sudo systemctl enable docker
   ```
